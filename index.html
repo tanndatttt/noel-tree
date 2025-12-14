@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cây Thông Noel </title>
+    <style>
+        body {
+            background-color: #0f1c2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+        .tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* --- CẤU TRÚC 3 TẦNG CÂY (SỬA LẠI KÍCH THƯỚC) --- */
+        
+        /* Tầng 1: Nhỏ nhất - Trên cùng */
+        .layer-top {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 60px solid #2ecc71; /* Xanh lá tươi */
+            z-index: 3; /* Nằm trên cùng */
+            position: relative;
+        }
+
+        /* Tầng 2: Trung bình - Ở giữa */
+        .layer-middle {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 80px solid #27ae60; /* Xanh đậm hơn chút */
+            margin-top: -30px; /* Chồng lấn lên */
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Tầng 3: To nhất - Dưới cùng */
+        .layer-bottom {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 100px solid #1e8449; /* Xanh đậm nhất */
+            margin-top: -40px; /* Chồng lấn lên */
+            z-index: 1;
+            position: relative;
+        }
+
+        /* --- Thân cây --- */
+        .trunk {
+            width: 30px;
+            height: 50px;
+            background-color: #795548;
+            margin-top: -10px;
+            z-index: 0;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* --- Ngôi sao --- */
+        .star {
+            font-size: 40px;
+            color: #f1c40f;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: spin 3s infinite linear;
+            text-shadow: 0 0 15px #f1c40f;
+        }
+
+        /* --- Đèn trang trí (Chỉnh vị trí theo kích thước mới) --- */
+        .layer-top::after {
+            content: ''; position: absolute; width: 8px; height: 8px; border-radius: 50%;
+            background: #ff4757; top: 30px; left: -10px; animation: blink 1s infinite alternate;
+        }
+
+        .layer-middle::before {
+            content: ''; position: absolute; width: 10px; height: 10px; border-radius: 50%;
+            background: #3742fa; top: 40px; left: -25px; animation: blink 1s infinite alternate 0.3s;
+        }
+        .layer-middle::after {
+            content: ''; position: absolute; width: 10px; height: 10px; border-radius: 50%;
+            background: #ffa502; top: 50px; left: 15px; animation: blink 1s infinite alternate 0.5s;
+        }
+
+        .layer-bottom::before {
+            content: ''; position: absolute; width: 12px; height: 12px; border-radius: 50%;
+            background: #ff6b81; top: 60px; left: -40px; animation: blink 1s infinite alternate 0.7s;
+        }
+        .layer-bottom::after {
+            content: ''; position: absolute; width: 12px; height: 12px; border-radius: 50%;
+            background: #eccc68; top: 70px; left: 30px; animation: blink 1s infinite alternate 0.9s;
+        }
+
+        /* --- Hiệu ứng nền --- */
+        .snow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+            background-image: radial-gradient(3px 3px at 100px 50px, #fff, transparent), radial-gradient(5px 5px at 200px 150px, #fff, transparent);
+            background-size: 200px 200px;
+            animation: snow 3s linear infinite;
+            opacity: 0.3;
+        }
+
+        .text {
+            color: white; margin-top: 30px; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #fff;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        @keyframes blink { 0% { opacity: 0.3; } 100% { opacity: 1; box-shadow: 0 0 10px currentColor; } }
+        @keyframes spin { 0% { transform: translateX(-50%) rotateY(0deg); } 100% { transform: translateX(-50%) rotateY(360deg); } }
+        @keyframes snow { 0% { background-position: 0 0; } 100% { background-position: 0 200px; } }
+    </style>
+</head>
+<body>
+
+    <div class="snow"></div>
+
+    <div class="container">
+        <div class="tree">
+            <div class="star">★</div>
+            <div class="layer-top"></div>
+            <div class="layer-middle"></div>
+            <div class="layer-bottom"></div>
+            <div class="trunk"></div>
+        </div>
+        <div class="text">MERRY CHRISTMAS</div>
+    </div>
+
+</body>
+</html>
